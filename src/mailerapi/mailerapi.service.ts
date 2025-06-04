@@ -6,7 +6,10 @@ export class mailerApiService {
   constructor(private readonly mailerService: NestMailerService) {}
 
   async sendEmail(to: string, message: string, senderName: string) {
+    console.log('service ma hain', to, message, senderName);
     try {
+      console.log('try block  ma hain', to, message, senderName ,process.env.password);
+
       await this.mailerService.sendMail({
         to,
         subject: 'mail send by Locamate',
@@ -38,7 +41,7 @@ export class mailerApiService {
             </div>
             `,
       });
-
+      console.log('mail send ho gaoi');
       return { success: true };
     } catch (error) {
       return { message: error.message, success: false };

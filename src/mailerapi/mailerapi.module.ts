@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MailerModule as NestMailerModule } from '@nestjs-modules/mailer';
 import { mailerApiService } from './mailerapi.service';
+import { ConfigModule } from '@nestjs/config';
 
 const mailerOptions: any = {
   transport: {
@@ -8,8 +9,8 @@ const mailerOptions: any = {
     port: 587,
     secure: false,
     auth: {
-      user: process.env.email,
-      pass: process.env.password,
+      user: 'akhtarusman716@gmail.com',
+      pass: 'objy zwfv zkyi dono',
     },
   },
   defaults: {
@@ -26,7 +27,10 @@ const mailerOptions: any = {
   },
 };
 @Module({
-  imports: [NestMailerModule.forRoot(mailerOptions)],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    NestMailerModule.forRoot(mailerOptions),
+  ],
   providers: [mailerApiService],
   exports: [mailerApiService],
 })
